@@ -78,7 +78,7 @@ header span {
     padding: 1rem;
     margin: 1.5rem;
     border-radius: 1rem;
-    box-shadow: 5px 5px #000;
+    box-shadow: 5px 5px 15px #000;
 }
 
 .movie-container img {
@@ -112,4 +112,26 @@ header span {
 
 .desc-container {
     color: #ACACAC;
+}
+
+/* TABLET - DESKTOP LAYOUT */
+@media screen and (min-width: 768px) {
+    header div {
+        width: 50%;
+        align-items: center;
+    }
+
+    header > div > input {
+        width: 100%;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-container {
+        width: 75%;
+    }
 }
