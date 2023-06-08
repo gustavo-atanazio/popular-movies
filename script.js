@@ -1,16 +1,63 @@
-const movieContainer = document.querySelector(".movie-container");
+import {key} from "/key.js";
 
-const movie = {
-    src: "image 3.svg",
-    title: "The Batman",
-    year: "2022",
-    rate: "9.4",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
+
+async function getMovies() {
+    const conexao = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${key}`);
+    const movies = await conexao.json();
+    console.log(movies);
+
+    movies.results.forEach(movie => renderMovies(movie));
 }
 
-function renderMovie({ src, title, year, rate, description }) {
+getMovies();
+
+function renderMovies({ title, poster_path, vote_average, overview, release_date }) {
+    const main = document.querySelector("main");
+    const movieContainer = document.createElement("div");
+    movieContainer.classList.add("movie-container");
+    main.appendChild(movieContainer);
+
+    movieContainer.innerHTML = `
+        <img src="${IMG_URL+poster_path}" alt="Movie banner">
+
+        <div class="mid-container">
+            <div>
+                <h2>${title}</h2>
+                <span>${release_date}</span>
+            </div>
+
+            <div>
+                <div class="icons-container">
+                    <span class="material-symbols-outlined">star</span>
+                    <span>${vote_average}</span>
+                </div>
+
+                <div class="icons-container">
+                    <button class="favorite-btn">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </button>
+                    <span>Favoritar</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="desc-container">
+            <p>${overview}</p>
+        </div>
+    `
+}
+
+// Alternative way
+
+/* function renderMovie({ title, poster_path, vote_average, overview, release_date }) {
+    const main = document.querySelector("main");
+    const movieContainer = document.createElement("div");
+    movieContainer.classList.add("movie-container");
+    main.appendChild(movieContainer);
+
     const movieBanner = document.createElement("img");
-    movieBanner.src = src;
+    movieBanner.src = IMG_URL+poster_path;
     movieContainer.appendChild(movieBanner);
 
     const midContainer = document.createElement("div");
@@ -25,7 +72,7 @@ function renderMovie({ src, title, year, rate, description }) {
     movieInfo.appendChild(movieTitle);
 
     const movieYear = document.createElement("span");
-    movieYear.textContent = year;
+    movieYear.textContent = release_date;
     movieInfo.appendChild(movieYear);
 
     const iconsDiv = document.createElement("div");
@@ -41,7 +88,7 @@ function renderMovie({ src, title, year, rate, description }) {
     iconsContainer.appendChild(star);
 
     const movieRate = document.createElement("span");
-    movieRate.textContent = rate;
+    movieRate.textContent = vote_average;
     iconsContainer.appendChild(movieRate);
 
     const iconsContainer2 = document.createElement("div");
@@ -66,8 +113,6 @@ function renderMovie({ src, title, year, rate, description }) {
     movieContainer.appendChild(descContainer);
 
     const movieDesc = document.createElement("p");
-    movieDesc.textContent = description;
+    movieDesc.textContent = overview;
     descContainer.appendChild(movieDesc);
-}
-
-renderMovie(movie);
+} */
