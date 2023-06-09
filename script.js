@@ -1,10 +1,12 @@
 import {key} from "/key.js";
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
+const main = document.querySelector("main");
+const searchInput = document.getElementById("search");
 
 async function getMovies() {
-    const conexao = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${key}`);
-    const movies = await conexao.json();
+    const connection = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&language=pt-BR&api_key=${key}`);
+    const movies = await connection.json();
     console.log(movies);
 
     movies.results.forEach(movie => renderMovies(movie));
@@ -13,7 +15,6 @@ async function getMovies() {
 getMovies();
 
 function renderMovies({ title, poster_path, vote_average, overview, release_date }) {
-    const main = document.querySelector("main");
     const movieContainer = document.createElement("div");
     movieContainer.classList.add("movie-container");
     main.appendChild(movieContainer);
@@ -48,71 +49,20 @@ function renderMovies({ title, poster_path, vote_average, overview, release_date
     `
 }
 
-// Alternative way
+async function searchMovie() {
+    main.innerHTML = "";
 
-/* function renderMovie({ title, poster_path, vote_average, overview, release_date }) {
-    const main = document.querySelector("main");
-    const movieContainer = document.createElement("div");
-    movieContainer.classList.add("movie-container");
-    main.appendChild(movieContainer);
+    const search = searchInput.value;
 
-    const movieBanner = document.createElement("img");
-    movieBanner.src = IMG_URL+poster_path;
-    movieContainer.appendChild(movieBanner);
+    const connection = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&language=pt-BR&page=1&api_key=${key}`);
+    const searchedMovies = await connection.json();
+    console.log(searchedMovies);
 
-    const midContainer = document.createElement("div");
-    midContainer.classList.add("mid-container");
-    movieContainer.appendChild(midContainer);
+    searchedMovies.results.forEach(movie => renderMovies(movie));
+}
 
-    const movieInfo = document.createElement("div");
-    midContainer.appendChild(movieInfo);
-
-    const movieTitle = document.createElement("h2");
-    movieTitle.textContent = title;
-    movieInfo.appendChild(movieTitle);
-
-    const movieYear = document.createElement("span");
-    movieYear.textContent = release_date;
-    movieInfo.appendChild(movieYear);
-
-    const iconsDiv = document.createElement("div");
-    midContainer.appendChild(iconsDiv);
-
-    const iconsContainer = document.createElement("div");
-    iconsContainer.classList.add("icons-container");
-    iconsDiv.appendChild(iconsContainer);
-
-    const star = document.createElement("span");
-    star.classList.add("material-symbols-outlined");
-    star.textContent = "star";
-    iconsContainer.appendChild(star);
-
-    const movieRate = document.createElement("span");
-    movieRate.textContent = vote_average;
-    iconsContainer.appendChild(movieRate);
-
-    const iconsContainer2 = document.createElement("div");
-    iconsContainer2.classList.add("icons-container");
-    iconsDiv.appendChild(iconsContainer2);
-
-    const favoriteButton = document.createElement("button");
-    favoriteButton.classList.add("favorite-btn");
-    iconsContainer2.appendChild(favoriteButton);
-
-    const heart = document.createElement("span");
-    heart.classList.add("material-symbols-outlined");
-    heart.textContent = "favorite";
-    favoriteButton.appendChild(heart);
-
-    const favorite = document.createElement("span");
-    favorite.textContent = "Favoritar";
-    iconsContainer2.appendChild(favorite);
-
-    const descContainer = document.createElement("div");
-    descContainer.classList.add("desc-container");
-    movieContainer.appendChild(descContainer);
-
-    const movieDesc = document.createElement("p");
-    movieDesc.textContent = overview;
-    descContainer.appendChild(movieDesc);
-} */
+searchInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        searchMovie();
+    }
+});
