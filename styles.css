@@ -12,6 +12,7 @@
 }
 
 .material-symbols-outlined {
+    transition: 0.2s;
     font-size: 1.7rem;
     font-variation-settings:
     'FILL' 0,
