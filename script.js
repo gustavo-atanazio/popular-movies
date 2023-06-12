@@ -32,13 +32,46 @@ searchInput.addEventListener("keydown", event => {
     }
 });
 
+function getMoviesFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("Favorite movies"));
+}
+
+function removeFromLocalStorage(id) {
+    const movies = getMoviesFromLocalStorage() || [];
+    const findMovie = movies.find(movie => movie.id == id)
+    const newMovies = movies.filter(movie => movie.id != findMovie.id)
+    localStorage.setItem('Favorite movies', JSON.stringify(newMovies))
+}
+
 function favMovie(event, movie) {
-    console.log(event);
-    console.log(movie);
+    const favoriteState = {
+        favorited: 'active',
+        notFavorited: 'material-symbols-outlined'
+    }
+
+    if (event.classList == favoriteState.notFavorited) {
+        const movies = getMoviesFromLocalStorage() || [];
+        event.classList.add("active");
+    
+        movies.push(movie);
+    
+        localStorage.setItem("Favorite movies", JSON.stringify(movies));
+    } else {
+        removeFromLocalStorage(movie.id);
+        event.classList.remove("active");
+    }
+
+}
+
+function checkMovieIsFavorited(id) {
+    const movies = getMoviesFromLocalStorage() || [];
+    return movies.find(movie => movie.id == id);
 }
 
 function renderMovies(movie) {
     const { id, title, poster_path, vote_average, release_date, overview } = movie;
+
+    const isFavorited = checkMovieIsFavorited(id);
 
     const year = new Date(release_date).getFullYear();
     const rating = Number(vote_average).toFixed(1);
@@ -89,11 +122,12 @@ function renderMovies(movie) {
 
     const favoriteButton = document.createElement("button");
     favoriteButton.classList.add("favorite-btn");
-    favoriteButton.addEventListener("click", event => favMovie(event, movie));
+    favoriteButton.addEventListener("click", event => favMovie(event.target, movie));
     iconsContainer2.appendChild(favoriteButton);
 
     const heart = document.createElement("span");
     heart.classList.add("material-symbols-outlined");
+    isFavorited ? heart.classList.add("active") : "";
     heart.textContent = "favorite";
     favoriteButton.appendChild(heart);
 
