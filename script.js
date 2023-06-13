@@ -3,6 +3,23 @@ import {key} from "/key.js";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const main = document.querySelector("main");
 const searchInput = document.getElementById("search");
+const checkbox = document.getElementById("checkbox");
+
+checkbox.addEventListener("click", checkCheckboxStatus);
+
+function checkCheckboxStatus() {
+    const isChecked = checkbox.checked;
+
+    if (isChecked) {
+        main.innerHTML = "";
+        
+        const movies = getMoviesFromLocalStorage() || [];
+        movies.forEach(movie => renderMovies(movie));
+    } else {
+        main.innerHTML = "";
+        getMovies();
+    }
+}
 
 async function getMovies() {
     const connection = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&language=pt-BR&api_key=${key}`);
@@ -60,7 +77,6 @@ function favMovie(event, movie) {
         removeFromLocalStorage(movie.id);
         event.classList.remove("active");
     }
-
 }
 
 function checkMovieIsFavorited(id) {
@@ -76,7 +92,6 @@ function renderMovies(movie) {
     const year = new Date(release_date).getFullYear();
     const rating = Number(vote_average).toFixed(1);
 
-    const main = document.querySelector("main");
     const movieContainer = document.createElement("div");
     movieContainer.classList.add("movie-container");
     main.appendChild(movieContainer);
