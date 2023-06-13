@@ -22,7 +22,6 @@
 }
 
 body {
-    width: 100vw;
     height: 100vh;
     background-color: var(--azul-background);
 }
@@ -51,12 +50,10 @@ header > div > input {
     border-radius: 0.5rem;
     color: #FFF;
     background-color: rgba(0, 0, 0, 0.5);
-    font-family: 'Kumbh Sans', sans-serif;
 }
 
 header > div > input::placeholder {
     color: #8A8A8A;
-    font-family: 'Kumbh Sans', sans-serif;
 }
 
 header > div > div {
@@ -146,5 +143,14 @@ header span {
 
     .movie-container {
         width: 75%;
+        gap: 2rem;
+    }
+
+    .movie-container img {
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .desc-container {
+        font-size: 1.4rem;
     }
 }
