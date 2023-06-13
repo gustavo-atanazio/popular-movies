@@ -82,6 +82,7 @@ header span {
 .movie-container img {
     border-radius: 4rem;
     width: 11rem;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .mid-container {
@@ -144,10 +145,6 @@ header span {
     .movie-container {
         width: 75%;
         gap: 2rem;
-    }
-
-    .movie-container img {
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
     }
 
     .desc-container {
