@@ -12,7 +12,7 @@ function checkCheckboxStatus() {
 
     if (isChecked) {
         main.innerHTML = "";
-        
+
         const movies = getMoviesFromLocalStorage() || [];
         movies.forEach(movie => renderMovies(movie));
     } else {
