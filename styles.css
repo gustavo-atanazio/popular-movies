@@ -147,6 +147,10 @@ header span {
         gap: 2rem;
     }
 
+    .favorite-btn {
+        cursor: pointer;
+    }
+
     .desc-container {
         font-size: 1.4rem;
     }
