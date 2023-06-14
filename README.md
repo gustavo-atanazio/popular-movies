@@ -3,7 +3,7 @@
 <div align='center'><a>Clique aqui para testar</a></div>
 
 <div align='center'>
-  <img src='' width='700px'/>
+  <img src='https://github.com/gustavo-atanazio/popular-movies/assets/124182846/94aa3893-4e73-4db7-99d2-d2814b14a509' width='700px'/>
 </div>
 
 ## 📘 Sobre o projeto
