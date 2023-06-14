@@ -59,6 +59,11 @@ header > div > input::placeholder {
 header > div > div {
     display: flex;
     gap: 0.6rem;
+    justify-content: center;
+}
+
+#checkbox {
+    cursor: pointer;
 }
 
 header span {
