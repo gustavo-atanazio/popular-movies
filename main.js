@@ -7,7 +7,7 @@ export const searchInput = document.getElementById("search");
 export const checkbox = document.getElementById("checkbox");
 
 export async function getMovies() {
-    const connection = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&language=pt-BR&api_key=${process.env.API_KEY}`);
+    const connection = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&language=pt-BR&api_key=${window.env.API_KEY}`);
     const movies = await connection.json();
 
     movies.results.forEach(movie => renderMovies(movie));
