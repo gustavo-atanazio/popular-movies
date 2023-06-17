@@ -1,13 +1,29 @@
 <h1 align='center'>Popular-movies</h1>
 <p align='center'>Todos os filmes em um só lugar</p>
-<p align='center'><a href=''>Clique aqui para testar</a></p>
 
 <div align='center'>
   <img src='https://github.com/gustavo-atanazio/popular-movies/assets/124182846/94aa3893-4e73-4db7-99d2-d2814b14a509' width='700px'/>
 </div>
 
 ## 📘 Sobre o projeto
-Esse projeto faz parte de uma iniciativa da [Alura](https://www.alura.com.br/), o [#7DaysOfCode](https://7daysofcode.io/), que consiste em propor a construção de um projeto usando determinadas ferramentas durante 7 dias, sendo que a cada dia é dada uma tarefa, e há um design a ser seguido. O desafio em questão é sobre manipulação do DOM e consumo de API com JavaScript, podendo não só exercitar o que já aprendeu como conhecer e aplicar novas abordagens.
+Esse projeto faz parte de uma iniciativa da [Alura](https://www.alura.com.br/), o [#7DaysOfCode](https://7daysofcode.io/), que consiste em propor a construção de uma aplicação usando determinadas ferramentas durante 7 dias, sendo que a cada dia é dada uma tarefa, e há um design a ser seguido. O desafio em questão é sobre manipulação do DOM e consumo de API com JavaScript, podendo não só exercitar o que já aprendeu como conhecer e aplicar novas abordagens.
+
+## 🚀 Testando o projeto
+Para fazer uso da aplicação, será necessário rodá-la localmente em sua máquina e gerar uma chave de API do [The Movie Database](https://developer.themoviedb.org/docs). Para isso, siga as instruções a seguir:
+
+1. Abra o Git Bash, selecione o diretório em que o projeto será clonado e use o comando:
+```
+$ git clone (url do repositório)
+```
+
+2. Em seguida, acesse o site do The Movie Database, realize seu cadastro e gere a chave para utilizar a API.
+
+3. Por fim, vá no arquivo ``` main.js ``` e exclua a primeira linha (reponsável pelo import estático da key). Em seguida, atribua à váriavel ``` API_KEY ``` a sua chave, entre aspas. O código ficará semelhante ao exemplo abaixo:
+```
+export const API_KEY = "sua chave";
+```
+
+Após estes passos, basta abrir o arquivo ``` index.html ``` em seu navegador e testar o projeto como desejar.
 
 ## 🔨 Ferramentas usadas
 - HTML
