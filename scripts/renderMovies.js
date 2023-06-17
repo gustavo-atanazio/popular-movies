@@ -18,6 +18,7 @@ export function renderMovies(movie) {
 
     const movieBanner = document.createElement("img");
     movieBanner.src = IMG_URL+poster_path;
+    movieBanner.alt = title + " banner";
     movieContainer.appendChild(movieBanner);
 
     const midContainer = document.createElement("div");
